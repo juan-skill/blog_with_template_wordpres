@@ -91,36 +91,36 @@
      <div class="container">
        <div class="row align-items-stretch retro-layout">
          <div class="col-md-5">
-           <a href="" class="hentry img-1 h-100 gradient" style="background-image: url();">
-             <span class="post-category text-white bg-danger">CATEGORIA</span>
+           <a href="" class="hentry img-1 h-100 gradient" style="background-image: url( {{ post1.image_referencial.url }} );">
+             <span class="post-category text-white bg-danger">{{ post1.category | upper }}</span>
              <div class="text">
-               <h2>TITULO</h2>
-               <span>FETCHA</span>
+               <h2>{{ post1.title }}</h2>
+               <span>{{ post1.date_published }}</span>
              </div>
            </a>
          </div>
          <div class="col-md-7">
-           <a href="" class="hentry img-2 v-height mb30 gradient" style="background-image: url();">
-             <span class="post-category text-white bg-success">CATEGORIA</span>
+           <a href="" class="hentry img-2 v-height mb30 gradient" style="background-image: url( {{ post2.image_referencial.url }});">
+             <span class="post-category text-white bg-success">{{ post2.category | upper }}</span>
              <div class="text text-sm">
-               <h2>TITULO</h2>
-               <span>FECHA</span>
+               <h2>{{ post2.title }}</h2>
+               <span>{{ post2.date_published }}</span>
              </div>
            </a>
 
            <div class="two-col d-block d-md-flex">
-             <a href="" class="hentry v-height img-2 gradient" style="background-image: url();">
-               <span class="post-category text-white bg-primary">CATEGORIA</span>
+             <a href="" class="hentry v-height img-2 gradient" style="background-image: url({{ post3.image_referencial.url }});">
+               <span class="post-category text-white bg-primary">{{ post3.category | upper }}</span>
                <div class="text text-sm">
-                 <h2>TITULO</h2>
-                 <span>FECHA</span>
+                 <h2>{{ post3.title }}</h2>
+                 <span>{{ post3.date_published }}</span>
                </div>
              </a>
-             <a href="" class="hentry v-height img-2 ml-auto gradient" style="background-image: url();">
-               <span class="post-category text-white bg-warning">CATEGORIA</span>
+             <a href="" class="hentry v-height img-2 ml-auto gradient" style="background-image: url( {{ post4.image_referencial.url }});">
+               <span class="post-category text-white bg-warning">{{ post4.category | upper }}</span>
                <div class="text text-sm">
-                 <h2>TITULO</h2>
-                 <span>PUBLICACION</span>
+                 <h2>{{ post4.title }}</h2>
+                 <span>{{ post4.date_published }}</span>
                </div>
              </a>
            </div>
