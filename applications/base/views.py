@@ -1,6 +1,7 @@
 import random
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, View
+from .forms import ContactForm
 from .models import Post, Category, SocialMedias, Web, Suscriptor
 from .utils import *
 
@@ -67,3 +68,16 @@ class Listed(ListView):
     def get(self,request, category_name, *args,**kwargs):
         context = generate_category(request, category_name)
         return render(request,'category.html', context)  
+
+
+class FormContact(View):
+    def get(self,request,*args,**kwargs):
+        
+        form = ContactForm()
+        context = {
+            'socials': getSocialNetwork(),
+            'web': getWeb(),
+            'form': form,    
+        }
+        
+        return render(request, 'contact.html', context)    
