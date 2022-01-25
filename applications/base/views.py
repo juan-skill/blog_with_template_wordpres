@@ -97,9 +97,38 @@ class Listado(ListView):
 
         context = {
             'posts':posts,
-            'sociales': getSocialNetwork(),
+            'socials': getSocialNetwork(),
             'web': getWeb(),
-            'categoria':category,
+            'category': category,
         }
         
         return render(request,'category.html', context)
+    
+
+class GeneralList(ListView):
+
+    def get(self, request, *args,**kwargs):
+        posts = Post.objects.filter(
+                status = True,
+                published = True,
+                category = Category.objects.get(name = 'General')
+                )
+        try:
+            category = Category.objects.get(name = 'General')
+        except:
+            category = None
+
+        
+        paginator = Paginator(posts,3)
+        pagina = request.GET.get('page')
+        posts = paginator.get_page(pagina)
+        
+
+        context = {
+            'posts':posts,
+            'socials': getSocialNetwork(),
+            'web': getWeb(),
+            'category': category,
+        }
+        
+        return render(request,'category.html', context)    

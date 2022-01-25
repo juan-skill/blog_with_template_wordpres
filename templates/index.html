@@ -56,8 +56,8 @@
            <nav class="site-navigation text-center " role="navigation">
 
              <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block mb-0">
-               <li class="active"><a href="">Inicio</a></li>
-               <li><a href="">Generales</a></li>
+               <li class="active"><a href="{% url 'base:index' %}">Inicio</a></li>
+               <li><a href="{% url 'base:generales' %}">Generales</a></li>
                <li><a href="{% url 'base:videogames' %}">VideoGames</a></li>
                <li><a href="">Contacto</a></li>
              </ul>
@@ -185,9 +185,9 @@
          </div>
          <div class="col-md-3 ml-auto">
            <h3 class="footer-heading mb-4">Menú Rápido</h3>
-           <ul class="list-unstyled float-left">
-             <li><a href="">Generales</a></li>
-             <li><a href="">Videojuegos</a></li>
+           <ul class="list-unstyled float-left">				
+             <li><a href="{% url 'base:generales' %}">Generales</a></li>
+             <li><a href="{% url 'base:videogames' %}">Videojuegos</a></li>
              <li><a href="">Contacto</a></li>
            </ul>
          </div>
