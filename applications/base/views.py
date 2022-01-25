@@ -7,7 +7,10 @@ from .models import Post, Category, SocialMedias, Web, Suscriptor
 
 
 def getPostbyId(id):
-    return Post.objects.get(id = id)
+    try: 
+        return Post.objects.get(id = id)
+    except:
+        return None
 
 class Inicio(ListView):
     
@@ -33,12 +36,32 @@ class Inicio(ListView):
         
         print(main_post)
         
+        try:
+            post_videogames = Post.objects.filter(
+                                status = True,
+                                published = True,
+                                category = Category.objects.get(name = 'Video Games')
+                                ).latest('date_published')
+        except:
+            post_videogames = None
+
+        try:
+            post_general = Post.objects.filter(
+                            status = True,
+                            published = True,
+                            category = Category.objects.get(name = 'General')
+                            ).latest('date_published')
+        except:
+            post_general = None
+        
         context = {
             'main':  main_post,
             'post1': getPostbyId(post1),
             'post2': getPostbyId(post2),
             'post3': getPostbyId(post3),
             'post4': getPostbyId(post4),
+            'post_general':post_general,
+            'post_videogames':post_videogames, 
         }        
         
         return render(request, 'index.html', context)
