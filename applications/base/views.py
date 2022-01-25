@@ -11,6 +11,13 @@ def getPostbyId(id):
         return Post.objects.get(id = id)
     except:
         return None
+    
+def getSocialNetwork():
+    return SocialMedias.objects.filter(status = True).latest('date_created')
+
+def getWeb():
+    return Web.objects.filter(status = True).latest('date_created')
+    
 
 class Inicio(ListView):
     
@@ -61,7 +68,9 @@ class Inicio(ListView):
             'post3': getPostbyId(post3),
             'post4': getPostbyId(post4),
             'post_general':post_general,
-            'post_videogames':post_videogames, 
+            'post_videogames':post_videogames,
+            'socials':getSocialNetwork(),
+            'web':getWeb(),            
         }        
         
         return render(request, 'index.html', context)
