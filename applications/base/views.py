@@ -1,8 +1,8 @@
-from multiprocessing import context
 import random
 from turtle import pos
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.core.paginator import Paginator
 from .models import Post, Category, SocialMedias, Web, Suscriptor
 
 
@@ -74,3 +74,32 @@ class Inicio(ListView):
         }        
         
         return render(request, 'index.html', context)
+    
+    
+class Listado(ListView):
+
+    def get(self, request, *args,**kwargs):
+        posts = Post.objects.filter(
+                status = True,
+                published = True,
+                category = Category.objects.get(name = 'Video Games')
+                )
+        try:
+            category = Category.objects.get(name = 'Video Games')
+        except:
+            category = None
+
+        
+        paginator = Paginator(posts,3)
+        pagina = request.GET.get('page')
+        posts = paginator.get_page(pagina)
+        
+
+        context = {
+            'posts':posts,
+            'sociales': getSocialNetwork(),
+            'web': getWeb(),
+            'categoria':category,
+        }
+        
+        return render(request,'category.html', context)

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-   <title>BLOG.DEV</title>
+   <title>{% block title %}BLOG.DEV{% endblock title %}</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -19,6 +19,7 @@
    <link rel="stylesheet" href="{% static 'css/aos.css' %} ">
 
    <link rel="stylesheet" href="{% static 'css/style.css' %} ">
+	 {% block extracss %}{% endblock extracss %}
 
  </head>
  <body>
@@ -57,7 +58,7 @@
              <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block mb-0">
                <li class="active"><a href="">Inicio</a></li>
                <li><a href="">Generales</a></li>
-               <li><a href="">Videojuegos</a></li>
+               <li><a href="{% url 'base:videogames' %}">VideoGames</a></li>
                <li><a href="">Contacto</a></li>
              </ul>
            </nav>
@@ -65,6 +66,7 @@
        </div>
    </header>
 
+	 {% block body %}
 
    <div class="slide-one-item home-slider owl-carousel">
      <div class="site-cover site-cover-sm same-height overlay" style="background-image: url({{ main.image_referencial.url }});">
@@ -172,6 +174,8 @@
      </div>
    </div>
 
+	 {% endblock body %}
+
    <div class="site-footer">
      <div class="container">
        <div class="row mb-5">
@@ -236,5 +240,7 @@
  <script src="{% static 'js/aos.js' %} "></script>
 
  <script src="{% static 'js/main.js' %} "></script>
+
+ {% block extrajs %}{% endblock extrajs %}
  </body>
 </html>
