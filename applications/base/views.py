@@ -1,5 +1,5 @@
 import random
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, View
 from .forms import ContactForm
 from .models import Post, Category, SocialMedias, Web, Suscriptor
@@ -81,3 +81,15 @@ class FormContact(View):
         }
         
         return render(request, 'contact.html', context)    
+    
+    def post(self,request,*args,**kwargs):
+        form = ContactForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('base:index')
+        else:
+            context = {
+                'form':form,
+            }
+            return render(request,'contact.html', context)
