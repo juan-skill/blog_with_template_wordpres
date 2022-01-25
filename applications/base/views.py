@@ -1,6 +1,6 @@
 import random
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, View
+from django.views.generic import ListView, View, DetailView
 from .forms import ContactForm
 from .models import Post, Category, SocialMedias, Web, Suscriptor
 from .utils import *
@@ -93,3 +93,38 @@ class FormContact(View):
                 'form':form,
             }
             return render(request,'contact.html', context)
+
+
+class DetailPost(DetailView):
+    
+    def get(self,request,slug,*args,**kwargs):
+        try:
+            post = Post.objects.get(slug = slug)
+        except:
+            post = None
+        
+        posts = list(Post.objects.filter(
+                status = True,
+                published = True
+                ).values_list('id',flat = True))
+        
+        """
+        posts.remove(post.id)
+        post1 = random.choice(posts)
+        posts.remove(post1)
+        post2 = random.choice(posts)
+        posts.remove(post2)
+        post3 = random.choice(posts)
+        posts.remove(post3)
+        """
+
+        context = {
+            'post':post,
+            'socials':getSocialNetwork(),
+            'web':getWeb(),
+            #'post1':getPostbyId(post1),
+            # 'post2':getPostbyId(post2),
+            #'post3':getPostbyId(post3),
+        }
+        
+        return render(request, 'post.html', context)
