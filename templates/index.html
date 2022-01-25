@@ -67,17 +67,17 @@
 
 
    <div class="slide-one-item home-slider owl-carousel">
-     <div class="site-cover site-cover-sm same-height overlay" style="background-image: url();">
+     <div class="site-cover site-cover-sm same-height overlay" style="background-image: url({{ main.image_referencial.url }});">
        <div class="container">
          <div class="row same-height align-items-center">
            <div class="col-md-12 col-lg-6">
              <div class="post-entry">
-               <span class="post-category text-white bg-success mb-3">CATEGORIA</span>
-               <h2 class="mb-4"><a href="">TITULO</a></h2>
+               <span class="post-category text-white bg-success mb-3">{{ main.category | upper }}</span>
+               <h2 class="mb-4"><a href="">{{ main.title | upper }}</a></h2>
                <div class="post-meta align-items-center text-left">
-                 <figure class="author-figure mb-0 mr-3 float-left"><img src="" alt="Image" class="img-fluid"></figure>
-                 <span class="d-inline-block mt-1">Autor: </span>
-                 <span>FECHA</span>
+                 <figure class="author-figure mb-0 mr-3 float-left"><img src="{{ main.author.image_referencial.url }}" alt="Image" class="img-fluid"></figure>
+                 <span class="d-inline-block mt-1">Author: {{ main.author }}</span>
+                 <span>{{ main.date_published }}</span>
                </div>
              </div>
            </div>

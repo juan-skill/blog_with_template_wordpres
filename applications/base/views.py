@@ -1,3 +1,4 @@
+from multiprocessing import context
 import random
 from turtle import pos
 from django.shortcuts import render
@@ -20,5 +21,8 @@ class Inicio(ListView):
         
         print(main_post)
         
+        context = {
+            'main':  main_post,
+        }        
         
-        return render(request, 'index.html')
+        return render(request, 'index.html', context)
