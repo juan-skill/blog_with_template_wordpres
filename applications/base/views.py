@@ -1,23 +1,9 @@
 import random
-from turtle import pos
 from django.shortcuts import render
 from django.views.generic import ListView
-from django.core.paginator import Paginator
 from .models import Post, Category, SocialMedias, Web, Suscriptor
+from .utils import *
 
-
-def getPostbyId(id):
-    try: 
-        return Post.objects.get(id = id)
-    except:
-        return None
-    
-def getSocialNetwork():
-    return SocialMedias.objects.filter(status = True).latest('date_created')
-
-def getWeb():
-    return Web.objects.filter(status = True).latest('date_created')
-    
 
 class Inicio(ListView):
     
@@ -75,60 +61,9 @@ class Inicio(ListView):
         
         return render(request, 'index.html', context)
     
-    
-class Listado(ListView):
 
-    def get(self, request, *args,**kwargs):
-        posts = Post.objects.filter(
-                status = True,
-                published = True,
-                category = Category.objects.get(name = 'Video Games')
-                )
-        try:
-            category = Category.objects.get(name = 'Video Games')
-        except:
-            category = None
+class Listed(ListView):
 
-        
-        paginator = Paginator(posts,3)
-        pagina = request.GET.get('page')
-        posts = paginator.get_page(pagina)
-        
-
-        context = {
-            'posts':posts,
-            'socials': getSocialNetwork(),
-            'web': getWeb(),
-            'category': category,
-        }
-        
-        return render(request,'category.html', context)
-    
-
-class GeneralList(ListView):
-
-    def get(self, request, *args,**kwargs):
-        posts = Post.objects.filter(
-                status = True,
-                published = True,
-                category = Category.objects.get(name = 'General')
-                )
-        try:
-            category = Category.objects.get(name = 'General')
-        except:
-            category = None
-
-        
-        paginator = Paginator(posts,3)
-        pagina = request.GET.get('page')
-        posts = paginator.get_page(pagina)
-        
-
-        context = {
-            'posts':posts,
-            'socials': getSocialNetwork(),
-            'web': getWeb(),
-            'category': category,
-        }
-        
-        return render(request,'category.html', context)    
+    def get(self,request, category_name, *args,**kwargs):
+        context = generate_category(request, category_name)
+        return render(request,'category.html', context)  
