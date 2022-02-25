@@ -159,7 +159,7 @@
             <div class="ml-auto"><a href="{% url 'base:videogames'  %}" class="view-all-btn">VER TODOS</a></div>
           </div>
           <div class="entry2 mb-5">
-            <a href="{% url 'base:detalle_post' post_general.slug %}"><img src="{{ post_videogames.image_referencial.url }}" alt="Image" class="img-fluid rounded"></a>
+            <a href="{% url 'base:detalle_post' post_videogames.slug %}"><img src="{{ post_videogames.image_referencial.url }}" alt="Image" class="img-fluid rounded"></a>
             <span class="post-category text-white bg-primary mb-3"></span>
             <h2><a href="{% url 'base:detalle_post' post_videogames.slug %}"></a>{{ post_videogames.title }}</h2>
             <div class="post-meta align-items-center text-left clearfix">

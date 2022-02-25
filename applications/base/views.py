@@ -98,10 +98,13 @@ class FormContact(View):
 class DetailPost(DetailView):
     
     def get(self,request,slug,*args,**kwargs):
+        print("hol2 ", slug)
         try:
             post = Post.objects.get(slug = slug)
         except:
             post = None
+        
+        print("post ", post)
         
         posts = list(Post.objects.filter(
                 status = True,
@@ -122,9 +125,9 @@ class DetailPost(DetailView):
             'post':post,
             'socials':getSocialNetwork(),
             'web':getWeb(),
-            #'post1':getPostbyId(post1),
-            # 'post2':getPostbyId(post2),
-            #'post3':getPostbyId(post3),
         }
-        
+        #'post1':getPostbyId(post1),
+        # 'post2':getPostbyId(post2),
+        #'post3':getPostbyId(post3),
+            
         return render(request, 'post.html', context)
