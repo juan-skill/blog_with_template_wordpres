@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  
+  backend:
+    build:
+      context: $HOME/blog2_project/backend/
+      dockerfile: $HOME/blog2_project/local_deploy/Dockerfile_django
+    env_file: $HOME/blog2_project/backend/.env
+    volumes: 
+      - $HOME/blog2_project/backend/:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - mynetwork
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile_postgres
+    restart: always
+    env_file: 
+      - $HOME/blog2_project/backend/.env
+    volumes:
+      - $HOME/blog2_project/data/:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"      
+    networks:
+      - mynetwork 
+
+networks:
+  mynetwork:
+    driver: bridge
+
